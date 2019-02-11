@@ -29,7 +29,7 @@ typedef struct pirNja { // pirates and ninjas
 } pirNja;
 
 
-void test () {
+void *individual (void *args) {
 	while (1) {
 		//sem_wait();
 		/* critical section */
@@ -38,7 +38,8 @@ void test () {
 }
 
 double random_num() {
-	return (double)rand() / (double)RAND_MAX; // random number between 0 and 1
+    double retVal = (double)rand() / (double)RAND_MAX;
+	return retVal; // random number between 0 and 1
 }
 
 int normalDist (int avgTime) {
@@ -46,14 +47,19 @@ int normalDist (int avgTime) {
 	srand(time(NULL));
 	a = random_num();
 	b = random_num();
-	int z = sqrt(-2*log(a)) * cos(2*M_PI*b);
-	//int scalar = 0.5 * time;
-	//int finalTime = z * scalar;
-	printf("a: %f\n", a);
-	printf("b: %f\n", a);
-	printf("z: %f\n", a);
-	printf("z: %f\n", rand());
-	return 0;
+	double z = sqrt(-2*log(a)) * cos(2*M_PI*b);
+	z /= 2.0;
+	z *= avgTime/3.0;
+	printf("avtTime: %d\n", avgTime);
+	z += avgTime;
+	int zInt = round(z);
+	zInt = zInt < 0 ? 0 : zInt;
+	zInt = zInt > avgTime*10 ? avgTime*10 : zInt;
+//	printf("a: %f\n", a);
+//	printf("b: %f\n", b);
+//	printf("z: %f\n", z);
+//    printf("z: %d\n", zInt);
+	return zInt;
 }
 
 int main (int argc, char* argv[]) {
@@ -82,16 +88,16 @@ int main (int argc, char* argv[]) {
 	pirNja array[total]; // one whole queue for both pirates and ninjas
 
 	// fill array
-	for (int i = 0; i < numPirates; i++) {
-		pthread_create(&array[i].thread_id, NULL, pirate, NULL);
-		array[i].isPirate = 1;
-		printf("%d\n", i);
-	}
-	for (int i = numPirates; i < total; i++) {
-		pthread_create(&array[i].thread_id, NULL, ninja, NULL);
-		array[i].isPirate = 0;
-		printf("%d\n", i);
-	}
+//	for (int i = 0; i < numPirates; i++) {
+//		pthread_create(&array[i].thread_id, NULL, pirate, NULL);
+//		array[i].isPirate = 1;
+//		printf("%d\n", i);
+//	}
+//	for (int i = numPirates; i < total; i++) {
+//		pthread_create(&array[i].thread_id, NULL, ninja, NULL);
+//		array[i].isPirate = 0;
+//		printf("%d\n", i);
+//	}
 
 	return 0;
 }
