@@ -10,6 +10,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <time.h>
 
 
 sem_t sem[];
@@ -28,14 +29,6 @@ typedef struct pirNja { // pirates and ninjas
 } pirNja;
 
 
-void *pirate() {
-
-}
-
-void *ninja () {
-
-}
-
 void test () {
 	while (1) {
 		//sem_wait();
@@ -44,6 +37,24 @@ void test () {
 	}
 }
 
+double random_num() {
+	return (double)rand() / (double)RAND_MAX; // random number between 0 and 1
+}
+
+int normalDist (int avgTime) {
+	double a, b;
+	srand(time(NULL));
+	a = random_num();
+	b = random_num();
+	int z = sqrt(-2*log(a)) * cos(2*M_PI*b);
+	//int scalar = 0.5 * time;
+	//int finalTime = z * scalar;
+	printf("a: %f\n", a);
+	printf("b: %f\n", a);
+	printf("z: %f\n", a);
+	printf("z: %f\n", rand());
+	return 0;
+}
 
 int main (int argc, char* argv[]) {
 	if (argc != 8) { 
@@ -51,19 +62,21 @@ int main (int argc, char* argv[]) {
 		exit(-1);
 	}
 
-	int numCTeams = atoi(argv[1]);
+	int numCTeams = atoi(argv[1]); // number of costuming teams
 	checkBounds(numCTeams, 2, 4);
 
-	int numPirates = atoi(argv[2]);
+	int numPirates = atoi(argv[2]); // number of pirates
 	checkBounds(numPirates, 10, 50);
 
-	int numNinjas = atoi(argv[3]);
+	int numNinjas = atoi(argv[3]); // number of ninjas
 	checkBounds(numNinjas, 10, 50);
 
-	int avgCTimeP = atoi(argv[4]);
-	int avgCTimeN = atoi(argv[5]);
-	int avgATimeP = atoi(argv[6]);
-	int avgATimeN = atoi(argv[7]);
+	int avgCTimeP = atoi(argv[4]); // average costuming time of a pirate
+	normalDist(avgCTimeP);
+
+	int avgCTimeN = atoi(argv[5]); // average costuming time of a ninja
+	int avgATimeP = atoi(argv[6]); // average arrival time of a pirate
+	int avgATimeN = atoi(argv[7]); // average arrival time of a ninja
 
 	const int total = numPirates + numNinjas; // total number of pirates and ninjas
 	pirNja array[total]; // one whole queue for both pirates and ninjas
