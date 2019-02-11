@@ -19,7 +19,7 @@ typedef struct pirNja { // pirates and ninjas
 } pirNja;
 
 
-/*
+/**
 * Checks the bounds by comparing with the user input value
 * @param val The user input value
 * @param lower Lowest possible bound
@@ -41,7 +41,7 @@ void *individual (void *args) {
 	}
 }
 
-/*
+/**
 * Calculates a random number between 0 and 1
 * @return retVal a random double
 */
@@ -57,7 +57,6 @@ double random_num() {
 */
 int normalDist (int avgTime) {
 	double a, b, z;
-	srand(time(NULL)); // get different random number each time
 	a = random_num();
 	b = random_num();
 	z = sqrt(-2*log(a)) * cos(2*M_PI*b); // Box-Muller Transform
@@ -75,7 +74,27 @@ int normalDist (int avgTime) {
 	return zInt;
 }
 
+
+/**
+* Determines if pirate or ninja will return to costuming dept. later
+* @return 1 if they will return, 0 if they will not return
+*/
+int returnLater() {
+	int range, min;
+	range = 99;
+	min = 0;
+	int num = rand() % range + min; // num between 0 and 99
+	printf("Num: %d\n", num);
+	if (num >= 0 && num <= 25) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
 int main (int argc, char* argv[]) {
+	srand(time(NULL)); // get different random number each time
 	if (argc != 8) { 
 		printf("ERROR: Please enter 8 arguments\n");
 		exit(-1);
@@ -102,12 +121,12 @@ int main (int argc, char* argv[]) {
 
 	// fill array
 	for (int i = 0; i < numPirates; i++) {
-		pthread_create(&array[i].thread_id, NULL, pirate, NULL);
+		pthread_create(&array[i].thread_id, NULL, individual, NULL);
 		array[i].isPirate = 1;
 		// printf("%d\n", i);
 	}
 	for (int i = numPirates; i < total; i++) {
-		pthread_create(&array[i].thread_id, NULL, ninja, NULL);
+		pthread_create(&array[i].thread_id, NULL, individual, NULL);
 		array[i].isPirate = 0;
 		// printf("%d\n", i);
 	}
