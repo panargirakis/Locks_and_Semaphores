@@ -13,8 +13,18 @@
 #include <time.h>
 
 
-sem_t sem[];
+typedef struct pirNja { // pirates and ninjas
+	pthread_t thread_id;
+	int isPirate; // 1 is pirate, 0 is ninja 
+} pirNja;
 
+
+/*
+* Checks the bounds by comparing with the user input value
+* @param val The user input value
+* @param lower Lowest possible bound
+* @param upper Highest possible bound
+*/
 void checkBounds (int val, int lower, int upper) {
 	if (!(val >= lower && val <= upper)) {
 		printf("ERROR: Value not in bounds\n");
@@ -22,13 +32,7 @@ void checkBounds (int val, int lower, int upper) {
 	}
 }
 
-
-typedef struct pirNja { // pirates and ninjas
-	pthread_t thread_id;
-	int isPirate; // 1 is pirate, 0 is ninja 
-} pirNja;
-
-
+sem_t sem[]; // semaphore
 void *individual (void *args) {
 	while (1) {
 		//sem_wait();
@@ -37,28 +41,37 @@ void *individual (void *args) {
 	}
 }
 
+/*
+* Calculates a random number between 0 and 1
+* @return retVal a random double
+*/
 double random_num() {
     double retVal = (double)rand() / (double)RAND_MAX;
-	return retVal; // random number between 0 and 1
+	return retVal;
 }
 
+/**
+* Calculate the normal distribution
+* @param avgTime User input value
+* @return zInt in seconds
+*/
 int normalDist (int avgTime) {
-	double a, b;
-	srand(time(NULL));
+	double a, b, z;
+	srand(time(NULL)); // get different random number each time
 	a = random_num();
 	b = random_num();
-	double z = sqrt(-2*log(a)) * cos(2*M_PI*b);
+	z = sqrt(-2*log(a)) * cos(2*M_PI*b); // Box-Muller Transform
 	z /= 2.0;
 	z *= avgTime/3.0;
-	printf("avtTime: %d\n", avgTime);
+	printf("avgTime: %d\n", avgTime);
 	z += avgTime;
-	int zInt = round(z);
-	zInt = zInt < 0 ? 0 : zInt;
+	int zInt = round(z); // rounds double to nearest int val
+	zInt = zInt < 0 ? 0 : zInt; // prevents infinity error
 	zInt = zInt > avgTime*10 ? avgTime*10 : zInt;
 //	printf("a: %f\n", a);
 //	printf("b: %f\n", b);
 //	printf("z: %f\n", z);
-//    printf("z: %d\n", zInt);
+//  printf("z: %d\n", zInt);
 	return zInt;
 }
 
@@ -85,19 +98,19 @@ int main (int argc, char* argv[]) {
 	int avgATimeN = atoi(argv[7]); // average arrival time of a ninja
 
 	const int total = numPirates + numNinjas; // total number of pirates and ninjas
-	pirNja array[total]; // one whole queue for both pirates and ninjas
+	pirNja array[total]; // one queue for both pirates and ninjas
 
 	// fill array
-//	for (int i = 0; i < numPirates; i++) {
-//		pthread_create(&array[i].thread_id, NULL, pirate, NULL);
-//		array[i].isPirate = 1;
-//		printf("%d\n", i);
-//	}
-//	for (int i = numPirates; i < total; i++) {
-//		pthread_create(&array[i].thread_id, NULL, ninja, NULL);
-//		array[i].isPirate = 0;
-//		printf("%d\n", i);
-//	}
+	for (int i = 0; i < numPirates; i++) {
+		pthread_create(&array[i].thread_id, NULL, pirate, NULL);
+		array[i].isPirate = 1;
+		// printf("%d\n", i);
+	}
+	for (int i = numPirates; i < total; i++) {
+		pthread_create(&array[i].thread_id, NULL, ninja, NULL);
+		array[i].isPirate = 0;
+		// printf("%d\n", i);
+	}
 
 	return 0;
 }
