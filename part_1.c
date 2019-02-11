@@ -1,6 +1,7 @@
-//
-// Created by panos on 2/9/19.
-//
+/*
+* Project 3 - Part 1 - Pirates and Ninjas
+* Panos Argyrakis and Amanda Chan
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,9 +11,12 @@
 #include <pthread.h>
 #include <semaphore.h>
 
+
+sem_t sem[];
+
 void checkBounds (int val, int lower, int upper) {
 	if (!(val >= lower && val <= upper)) {
-		printf("ERROR: Value not in bounds");
+		printf("ERROR: Value not in bounds\n");
 		exit(-1);
 	}
 }
@@ -25,13 +29,20 @@ typedef struct pirNja { // pirates and ninjas
 
 
 void *pirate() {
-	
+
 }
 
 void *ninja () {
 
 }
 
+void test () {
+	while (1) {
+		//sem_wait();
+		/* critical section */
+		//sem_post();
+	}
+}
 
 
 int main (int argc, char* argv[]) {
@@ -44,10 +55,10 @@ int main (int argc, char* argv[]) {
 	checkBounds(numCTeams, 2, 4);
 
 	int numPirates = atoi(argv[2]);
-	checkBounds(numCTeams, 10, 50);
+	checkBounds(numPirates, 10, 50);
 
 	int numNinjas = atoi(argv[3]);
-	checkBounds(numCTeams, 10, 50);
+	checkBounds(numNinjas, 10, 50);
 
 	int avgCTimeP = atoi(argv[4]);
 	int avgCTimeN = atoi(argv[5]);
@@ -55,14 +66,18 @@ int main (int argc, char* argv[]) {
 	int avgATimeN = atoi(argv[7]);
 
 	const int total = numPirates + numNinjas; // total number of pirates and ninjas
-	pirNja array[total];
+	pirNja array[total]; // one whole queue for both pirates and ninjas
+
+	// fill array
 	for (int i = 0; i < numPirates; i++) {
 		pthread_create(&array[i].thread_id, NULL, pirate, NULL);
 		array[i].isPirate = 1;
+		printf("%d\n", i);
 	}
 	for (int i = numPirates; i < total; i++) {
 		pthread_create(&array[i].thread_id, NULL, ninja, NULL);
 		array[i].isPirate = 0;
+		printf("%d\n", i);
 	}
 
 	return 0;
