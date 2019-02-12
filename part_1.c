@@ -11,6 +11,7 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <time.h>
+#include "helpers.c"
 
 
 typedef struct pirNja { // pirates and ninjas
@@ -32,13 +33,21 @@ void checkBounds (int val, int lower, int upper) {
 	}
 }
 
+int returnLater();
+
 sem_t sem[]; // semaphore
-void *individual (void *args) {
-	while (1) {
-		//sem_wait();
-		/* critical section */
-		//sem_post();
-	}
+void *individual (void *arguments) {
+	argstruct *args = (argstruct *) arguments;
+	int willReturn;
+	do {
+		// wait to enter
+		// enter costume department
+		// sleep (dress)
+		// leave costume department
+		willReturn = returnLater();
+	} while (willReturn);
+	// update stats stored in args
+	return 0;
 }
 
 /**
@@ -94,9 +103,9 @@ int returnLater() {
 }
 
 int main (int argc, char* argv[]) {
-	srand(time(NULL)); // get different random number each time
+	// srand(time(NULL)); // get different random number each time
 	if (argc != 8) { 
-		printf("ERROR: Please enter 8 arguments\n");
+		printf("ERROR: Please enter 7 arguments\n");
 		exit(-1);
 	}
 
@@ -119,16 +128,19 @@ int main (int argc, char* argv[]) {
 	const int total = numPirates + numNinjas; // total number of pirates and ninjas
 	pirNja array[total]; // one queue for both pirates and ninjas
 
-	// fill array
-	for (int i = 0; i < numPirates; i++) {
-		pthread_create(&array[i].thread_id, NULL, individual, NULL);
-		array[i].isPirate = 1;
-		// printf("%d\n", i);
-	}
-	for (int i = numPirates; i < total; i++) {
-		pthread_create(&array[i].thread_id, NULL, individual, NULL);
-		array[i].isPirate = 0;
-		// printf("%d\n", i);
+
+    // struct for args
+	argstruct *args = (argstruct *) malloc(total*sizeof(argstruct));
+
+	// create threads
+	for (int i = 0; i < total; i++) {
+	    int isPirate = i < numPirates ? 1 : 0;
+	    args[i].isPirate = isPirate;
+	    args[i].arrival = isPirate ? avgATimeP : avgATimeN;
+	    args[i].costumngT = isPirate ? avgCTimeP : avgCTimeN;
+	    args[i].threadNum = i;
+		pthread_create(&array[i].thread_id, NULL, &individual, (void *) &args[i]);
+		printf("Thread %d will be isPirate%d\n", i, isPirate);
 	}
 
 	return 0;
