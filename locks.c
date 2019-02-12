@@ -26,7 +26,7 @@ void rwlock_init(rwlock_t *rw, unsigned int numTeams) {
 void rwlock_acquire_pirLock(rwlock_t *rw, int isPirate) {
     sem_wait(&rw->lockPir); // try to get piratelock
     rw->numPirates++; // increment num of pirates
-    if (rw->numPirates + rw->numNinjas == 1) { // if only one person
+    if (rw->numPirates == 1) { // if only one person
         sem_wait(&rw->lockNin); // acquire ninjalock
     }
     sem_wait(&rw->lockTeams);
@@ -46,7 +46,7 @@ void rwlock_release_pirLock(rwlock_t *rw) {
 void rwlock_acquire_ninLock(rwlock_t *rw, int isPirate) {
     sem_wait(&rw->lockNin);
     rw->numNinjas++;
-    if (rw->numNinjas + rw->numPirates == 1)
+    if (rw->numNinjas == 1)
         sem_wait(&rw->lockNin);
     sem_wait(&rw->lockTeams);
     sem_post(&rw->numNinjas);
