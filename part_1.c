@@ -13,93 +13,33 @@
 #include <time.h>
 #include "helpers.c"
 
-
-typedef struct pirNja { // pirates and ninjas
-	pthread_t thread_id;
-	int isPirate; // 1 is pirate, 0 is ninja 
-} pirNja;
-
-
-/**
-* Checks the bounds by comparing with the user input value
-* @param val The user input value
-* @param lower Lowest possible bound
-* @param upper Highest possible bound
-*/
-void checkBounds (int val, int lower, int upper) {
-	if (!(val >= lower && val <= upper)) {
-		printf("ERROR: Value not in bounds\n");
-		exit(-1);
-	}
-}
-
-int returnLater();
-
 sem_t sem[]; // semaphore
 void *individual (void *arguments) {
 	argstruct *args = (argstruct *) arguments;
 	int willReturn;
 	do {
-		// wait to enter
-		// enter costume department
-		// sleep (dress)
+		time_t start_t, end_t;
+		sleep((unsigned int) args->arrTime);
+
+		time(&start_t);
+		// enter costume department -- attempt to access lock for costume shop
+		// claim a spot
+		// release lock
+		time(&end_t); // measure waiting time
+		double diff_t = difftime(end_t, start_t);
+		sleep((unsigned int) args->costmTime);
 		// leave costume department
+		// attempt to access lock for costumer shop
+		// decrement spots
+		// release lock
+		if (diff_t <= 30.0)
+			args->totalCostT += args->costmTime; // only add time if low waiting time
+
 		willReturn = returnLater();
 	} while (willReturn);
 	// update stats stored in args
+
 	return 0;
-}
-
-/**
-* Calculates a random number between 0 and 1
-* @return retVal a random double
-*/
-double random_num() {
-    double retVal = (double)rand() / (double)RAND_MAX;
-	return retVal;
-}
-
-/**
-* Calculate the normal distribution
-* @param avgTime User input value
-* @return zInt in seconds
-*/
-int normalDist (int avgTime) {
-	double a, b, z;
-	a = random_num();
-	b = random_num();
-	z = sqrt(-2*log(a)) * cos(2*M_PI*b); // Box-Muller Transform
-	z /= 2.0;
-	z *= avgTime/3.0;
-	printf("avgTime: %d\n", avgTime);
-	z += avgTime;
-	int zInt = round(z); // rounds double to nearest int val
-	zInt = zInt < 0 ? 0 : zInt; // prevents infinity error
-	zInt = zInt > avgTime*10 ? avgTime*10 : zInt;
-//	printf("a: %f\n", a);
-//	printf("b: %f\n", b);
-//	printf("z: %f\n", z);
-//  printf("z: %d\n", zInt);
-	return zInt;
-}
-
-
-/**
-* Determines if pirate or ninja will return to costuming dept. later
-* @return 1 if they will return, 0 if they will not return
-*/
-int returnLater() {
-	int range, min;
-	range = 99;
-	min = 0;
-	int num = rand() % range + min; // num between 0 and 99
-	printf("Num: %d\n", num);
-	if (num >= 0 && num <= 25) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
 }
 
 int main (int argc, char* argv[]) {
@@ -126,8 +66,7 @@ int main (int argc, char* argv[]) {
 	int avgATimeN = atoi(argv[7]); // average arrival time of a ninja
 
 	const int total = numPirates + numNinjas; // total number of pirates and ninjas
-	pirNja array[total]; // one queue for both pirates and ninjas
-
+	pthread_t threads[total]; // one queue for both pirates and ninjas
 
     // struct for args
 	argstruct *args = (argstruct *) malloc(total*sizeof(argstruct));
@@ -136,12 +75,19 @@ int main (int argc, char* argv[]) {
 	for (int i = 0; i < total; i++) {
 	    int isPirate = i < numPirates ? 1 : 0;
 	    args[i].isPirate = isPirate;
-	    args[i].arrival = isPirate ? avgATimeP : avgATimeN;
-	    args[i].costumngT = isPirate ? avgCTimeP : avgCTimeN;
+	    args[i].arrTime = isPirate ? normalDist(avgATimeP) : normalDist(avgATimeN);
+	    args[i].costmTime = isPirate ? normalDist(avgCTimeP) : normalDist(avgCTimeN);
 	    args[i].threadNum = i;
-		pthread_create(&array[i].thread_id, NULL, &individual, (void *) &args[i]);
+		pthread_create(&threads[i], NULL, &individual, (void *) &args[i]);
 		printf("Thread %d will be isPirate%d\n", i, isPirate);
 	}
+
+	for (int i = 0; i < total; i++) {
+		pthread_join(threads[i], NULL);
+		printf("Called join for thread %d\n", i+1);
+	}
+
+	// print final stats
 
 	return 0;
 }
