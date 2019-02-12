@@ -12,8 +12,10 @@
 #include <semaphore.h>
 #include <time.h>
 #include "helpers.c"
+#include "locks.c"
 
-sem_t sem[]; // semaphore
+rwlock_t sem; // semaphore
+
 void *individual (void *arguments) {
 	argstruct *args = (argstruct *) arguments;
 	int willReturn;
@@ -67,6 +69,10 @@ int main (int argc, char* argv[]) {
 
 	const int total = numPirates + numNinjas; // total number of pirates and ninjas
 	pthread_t threads[total]; // one queue for both pirates and ninjas
+
+	// ------ init semaphores
+    rwlock_init(&sem);
+
 
     // struct for args
 	argstruct *args = (argstruct *) malloc(total*sizeof(argstruct));
