@@ -24,17 +24,30 @@ void *individual (void *arguments) {
 		sleep((unsigned int) args->arrTime);
 
 		time(&start_t);
+		printf("Thread %d isPir? %d try enter cost dept\n", args->threadNum, args->isPirate);
+		if (args->isPirate)
+		    rwlock_acquire_pirLock(&sem);
+        else
+            rwlock_acquire_ninLock(&sem);
+        printf("Thread %d isPir? %d success enter cost dept\n", args->threadNum, args->isPirate);
 		// enter costume department -- attempt to access lock for costume shop
 		// claim a spot
-		// release lock
+
 		time(&end_t); // measure waiting time
 		double diff_t = difftime(end_t, start_t);
 		sleep((unsigned int) args->costmTime);
+
 		// leave costume department
-		// attempt to access lock for costumer shop
 		// decrement spots
 		// release lock
-		if (diff_t <= 30.0)
+        printf("Thread %d isPir? %d try leave cost dept\n", args->threadNum, args->isPirate);
+        if (args->isPirate)
+            rwlock_release_pirLock(&sem);
+        else
+            rwlock_release_ninLock(&sem);
+        printf("Thread %d isPir? %d success leave cost dept\n", args->threadNum, args->isPirate);
+
+        if (diff_t <= 30.0)
 			args->totalCostT += args->costmTime; // only add time if low waiting time
 
 		willReturn = returnLater();
@@ -71,7 +84,7 @@ int main (int argc, char* argv[]) {
 	pthread_t threads[total]; // one queue for both pirates and ninjas
 
 	// ------ init semaphores
-    rwlock_init(&sem);
+    rwlock_init(&sem, (unsigned int) numCTeams);
 
 
     // struct for args

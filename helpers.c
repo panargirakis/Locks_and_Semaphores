@@ -32,7 +32,7 @@ int normalDist (int avgTime) {
     z = sqrt(-2*log(a)) * cos(2*M_PI*b); // Box-Muller Transform
     z /= 2.0;
     z *= avgTime/3.0;
-    printf("avgTime: %d\n", avgTime);
+//    printf("avgTime: %d\n", avgTime);
     z += avgTime;
     int zInt = round(z); // rounds double to nearest int val
     zInt = zInt < 0 ? 0 : zInt; // prevents infinity error
@@ -54,7 +54,7 @@ int returnLater() {
     range = 99;
     min = 0;
     int num = rand() % range + min; // num between 0 and 99
-    printf("Num: %d\n", num);
+//    printf("Num: %d\n", num);
     if (num >= 0 && num <= 25) {
         return 1;
     }
