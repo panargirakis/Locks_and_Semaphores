@@ -76,3 +76,48 @@ void checkBounds (int val, int lower, int upper) {
         exit(-1);
     }
 }
+
+/**
+* Prints usage statistics for proper billing for each pirate or ninja
+* @param numVisits The number of visits for a single pirate/ninja
+* @param timePerVis The total amount of time spent visiting
+* @param waitTimes The amount of time spent waiting
+*/
+void billingStats (int numVisits, int timePerVis, int waitTimes) {
+	printf("Number of Visits: %d\n", numVisits);
+	printf("Time of Each Visit: %d\n", timePerVis);
+	printf("Wait Times: %d\n", waitTimes);
+	// if waitTime > 30 min, then costume is free
+
+	int totalGold = timePerVis;
+	printf("Total Gold: %d\n", totalGold); // total gold owed to dept
+}
+
+
+/**
+* Prints expense profits 
+* @param numCTeams The number of costuming teams
+* @param totalTime The total amount of time inside costuming department
+*/
+void profitStats (int numCTeams, int totalTime) {
+	int teamCost = 5 * numCTeams;
+	printf("Costuming teams cost per day: %d\n", teamCost);
+	
+	// amount of time that each team was busy
+	// amount of time each team was free
+
+	int avgQLen = (pirates + ninjas) / totalTime;  // average queue length
+	printf("Average Queue Length: %d\n", avgQLen);
+
+	int goldAmt; // gross revenue (amount of gold)
+	printf("Gross Revenue: %d\n", goldAmt);
+	int goldPerVis = goldAmt/numVisits;
+	printf("Gold-Per-Visit: %d\n", goldPerVis);
+	
+	int totalProfit = goldAmt - teamCost;
+	printf("Total Profit: %d\n", totalProfit); 
+}
+
+
+
+
