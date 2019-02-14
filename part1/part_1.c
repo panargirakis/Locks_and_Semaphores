@@ -31,15 +31,12 @@ void *individual (void *arguments) {
             rwlock_acquire_ninLock(&sem);
         printf("Thread %d isPir? %d success enter cost dept\n", args->threadNum, args->isPirate);
 		// enter costume department -- attempt to access lock for costume shop
-		// claim a spot
 
 		time(&end_t); // measure waiting time
 		double diff_t = difftime(end_t, start_t);
 		sleep((unsigned int) args->costmTime);
 
 		// leave costume department
-		// decrement spots
-		// release lock
         printf("Thread %d isPir? %d try leave cost dept\n", args->threadNum, args->isPirate);
         if (args->isPirate)
             rwlock_release_pirLock(&sem);

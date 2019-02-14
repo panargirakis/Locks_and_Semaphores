@@ -99,24 +99,24 @@ void billingStats (int numVisits, int timePerVis, int waitTimes) {
 * @param numCTeams The number of costuming teams
 * @param totalTime The total amount of time inside costuming department
 */
-void profitStats (int numCTeams, int totalTime) {
-	int teamCost = 5 * numCTeams;
-	printf("Costuming teams cost per day: %d\n", teamCost);
-	
-	// amount of time that each team was busy
-	// amount of time each team was free
-
-	int avgQLen = (pirates + ninjas) / totalTime;  // average queue length
-	printf("Average Queue Length: %d\n", avgQLen);
-
-	int goldAmt; // gross revenue (amount of gold)
-	printf("Gross Revenue: %d\n", goldAmt);
-	int goldPerVis = goldAmt/numVisits;
-	printf("Gold-Per-Visit: %d\n", goldPerVis);
-	
-	int totalProfit = goldAmt - teamCost;
-	printf("Total Profit: %d\n", totalProfit); 
-}
+//void profitStats (int numCTeams, int totalTime) {
+//	int teamCost = 5 * numCTeams;
+//	printf("Costuming teams cost per day: %d\n", teamCost);
+//
+//	// amount of time that each team was busy
+//	// amount of time each team was free
+//
+//	int avgQLen = (pirates + ninjas) / totalTime;  // average queue length
+//	printf("Average Queue Length: %d\n", avgQLen);
+//
+//	int goldAmt; // gross revenue (amount of gold)
+//	printf("Gross Revenue: %d\n", goldAmt);
+//	int goldPerVis = goldAmt/numVisits;
+//	printf("Gold-Per-Visit: %d\n", goldPerVis);
+//
+//	int totalProfit = goldAmt - teamCost;
+//	printf("Total Profit: %d\n", totalProfit);
+//}
 
 
 
