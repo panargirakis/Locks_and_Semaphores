@@ -54,7 +54,7 @@ int returnLater() {
     range = 99;
     min = 0;
     int num = rand() % range + min; // num between 0 and 99
-//    printf("Num: %d\n", num);
+
     if (num >= 0 && num <= 25) {
         return 1;
     }
