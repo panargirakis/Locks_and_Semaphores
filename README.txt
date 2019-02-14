@@ -14,3 +14,14 @@ How to Test:
 
 Problem 2: Taming Massachusetts Drivers
 Description:
+When using the intersection, a driver will use 1-3 quadrants, based on the type of use. For example, if a car approaches from the North, depending on where it is going, it proceeds through the intersection as follows:
+
+Right: NW quadrant only
+Straight: NW, then SW quadrant
+Left: NW, then SW, then SE quadrants
+
+No two cars be in the same portion of the intersection at the same time. Each direction has a single lane of traffic and vehicles cannot pass each other in the intersection or in the line approaching the intersection. If two cars both approach from the same direction, the first car to reach the intersection should be the first to go. Additionally, the solution should not starve traffic from any other direction. Lastly, if cars from multiple directions may safely use the intersection at the same time, they should do so. We decided to use mutexes/condition variables to solve this synchronization problem.
+
+How to Test:
+1. make
+2. ./part_2
