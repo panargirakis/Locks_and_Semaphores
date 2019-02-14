@@ -14,7 +14,6 @@
 #include "locks_2.c"
 #include "helpers_2.c"
 
-pthread_t mutex;
 
 /**
 * Manages flow of cars
@@ -45,6 +44,5 @@ int main() {
 		pthread_join(threads[i], NULL);
 		printf("Called join for thread %d\n", i+1);
 	}
-
 	return 0;
 }
