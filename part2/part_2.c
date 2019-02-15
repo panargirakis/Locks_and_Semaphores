@@ -11,36 +11,46 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <time.h>
-#include "locks_2.c"
 #include "helpers_2.c"
+#include "linkedlist.c"
+#include "locks_2.c"
 
+#define NUMCARS 20
 
 /**
 * Manages flow of cars
 */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 void *cars (void *arguments) {
+    argstruct *args = (argstruct *) arguments;
+	while (1) {
+        args->approachDir = assignApp();
+        args->turnDir = assignTurn();
+        printf("Car %d will have approach direction: %d\n", args->threadNum, args->approachDir);
+        printf("Car %d will have turn direction: %d\n", args->threadNum, args->turnDir);
+
+		// try to go through
+		// trylock loop
+	};
 }
+#pragma clang diagnostic pop
 
 
 int main() {
-	const int numCars = 20;
-	pthread_t threads[numCars]; // queue for all cars
+	pthread_t threads[NUMCARS]; // queue for all cars
 
 	// struct for args
-	argstruct *args = (argstruct *) malloc(numCars*sizeof(argstruct));
+	argstruct *args = (argstruct *) malloc(NUMCARS*sizeof(argstruct));
 
 	// assign car directions
-	for (int i = 0; i < numCars; i++) {
-		args[i].approachDir = assignApp();
-		args[i].turnDir = assignTurn();
+	for (int i = 0; i < NUMCARS; i++) {
 		pthread_create(&threads[i], NULL, &cars, (void *) &args[i]);
-		printf("Car %d will have approach direction: %d\n", i, args[i].approachDir);
-		printf("Car %d will have turn direction: %d\n", i, args[i].turnDir);
-		printf("\n");	
 	}
 
 	// join threads	
-	for (int i = 0; i < numCars; i++) {
+	for (int i = 0; i < NUMCARS; i++) {
+	    args[i].threadNum = i;
 		pthread_join(threads[i], NULL);
 		printf("Called join for thread %d\n", i+1);
 	}
