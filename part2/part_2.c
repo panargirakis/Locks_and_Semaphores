@@ -29,6 +29,15 @@ void *cars (void *arguments) {
         args->turnDir = assignTurn();
         printf("Car %d will have approach direction: %d\n", args->threadNum, args->approachDir);
         printf("Car %d will have turn direction: %d\n", args->threadNum, args->turnDir);
+        getCubesNeeded(args);
+
+        Dir dir = args->approachDir;
+
+		pthread_mutex_lock(&lockQ[dir]);  // get queue lock
+        push(args, dir);  // push in queue
+		pthread_cond_wait(&condQ[dir], &lockQ[dir]);  // wait until you are serviced
+        pthread_mutex_unlock(&lockQ[dir]); // unlock queue
+
 
 		// try to go through
 		// trylock loop

@@ -2,16 +2,17 @@
 // Created by panos and amanda on 2/15/19.
 //
 
+pthread_mutex_t lockQ[4] = {PTHREAD_MUTEX_INITIALIZER}; // initializes lock
+pthread_cond_t condQ[4] = PTHREAD_COND_INITIALIZER; // initilize condition
+
 typedef struct Node
 {
     argstruct *args;
     struct Node *next;
 } Node;
 
-Node *northQ = NULL;
-Node *southQ = NULL;
-Node *westQ = NULL;
-Node *eastQ = NULL;
+int numOfQ[APPRMAX];
+Node *q[APPRMAX] = {NULL};
 
 Node *getLast(Node *head) {
     Node *n = head;
@@ -34,42 +35,14 @@ void addLast(argstruct *args, Node *queue) {
     last->next = new; // link last to new
 }
 
-void pushNorth(argstruct *args) {
-    addLast(args, northQ);
+void push(argstruct *args, Appr dir) {
+    addLast(args, q[dir]);
+    numOfQ[dir]++;
 }
 
-void popNorth() {
-    Node *deleted = northQ;
-    northQ = northQ->next;
+void pop(Appr dir) {
+    Node *deleted = q[dir];
+    q[dir] = q[dir]->next;
     free(deleted);
-}
-
-void pushSouth(argstruct *args) {
-    addLast(args, southQ);
-}
-
-void popSouth() {
-    Node *deleted = southQ;
-    southQ = southQ->next;
-    free(deleted);
-}
-
-void pushWest(argstruct *args) {
-    addLast(args, westQ);
-}
-
-void popWest() {
-    Node *deleted = westQ;
-    westQ = westQ->next;
-    free(deleted);
-}
-
-void pushEast(argstruct *args) {
-    addLast(args, eastQ);
-}
-
-void popEast() {
-    Node *deleted = eastQ;
-    eastQ = eastQ->next;
-    free(deleted);
+    numOfQ[dir]--;
 }

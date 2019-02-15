@@ -1,8 +1,8 @@
 #include <pthread.h>
 
 
-pthread_mutex_t locks[APPRMAX] = {PTHREAD_MUTEX_INITIALIZER}; // initializes lock
-pthread_cond_t cond[APPRMAX] = PTHREAD_COND_INITIALIZER; // initilize condition
+pthread_mutex_t lockCube[CUBEMAX] = {PTHREAD_MUTEX_INITIALIZER}; // initializes lock
+pthread_cond_t cubeCond[CUBEMAX] = PTHREAD_COND_INITIALIZER; // initilize condition
 
 
 /**
