@@ -14,3 +14,5 @@ test: all
 	echo test arguement rejection
 	./part_1 4 5 10 11 9 11 10
 	./part_1 4 30 10 11 7 11 6
+	echo ~~~~ cleaning ~~~~~
+	make clean
