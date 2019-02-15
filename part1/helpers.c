@@ -2,13 +2,18 @@
 // Created by panos and amanda on 2/11/19.
 //
 
+#define SIZE 10
+
 typedef struct argstruct {
     int isPirate;
     int arrTime;
     int costmTime;
-    int totalCostT;
-    int totalWaitT;
+    int goldOwed;
     int threadNum;
+    int numVisits;
+    double waitTVisits[SIZE];
+    int costmTVisits[SIZE];
+    int teamUsed[SIZE];
 } argstruct;
 
 /**
@@ -79,18 +84,22 @@ void checkBounds (int val, int lower, int upper) {
 
 /**
 * Prints usage statistics for proper billing for each pirate or ninja
-* @param numVisits The number of visits for a single pirate/ninja
-* @param timePerVis The total amount of time spent visiting
-* @param waitTimes The amount of time spent waiting
+* @param args Pointer to the args struct of a single thread
 */
-void billingStats (int numVisits, int timePerVis, int waitTimes) {
-	printf("Number of Visits: %d\n", numVisits);
-	printf("Time of Each Visit: %d\n", timePerVis);
-	printf("Wait Times: %d\n", waitTimes);
-	// if waitTime > 30 min, then costume is free
-
-	int totalGold = timePerVis;
-	printf("Total Gold: %d\n", totalGold); // total gold owed to dept
+void billingStats (argstruct *args) {
+    printf("\n%s with ID: %d\n", args->isPirate ? "Pirate" : "Ninja", args->threadNum);
+	printf("Number of Visits: %d\n", args->numVisits);
+	printf("Costuming Time of Each Visit:  ");
+    for (int i = 0; i < args->numVisits; i++) {
+        printf("Visit %d: %d min    ", i, args->costmTVisits[i]);
+    }
+    printf("\n");
+	printf("Wait Times of Each Visit:  ");
+    for (int i = 0; i < args->numVisits; i++) {
+        printf("Visit %d: %.0f min    ", i, args->waitTVisits[i]);
+    }
+    printf("\n");
+	printf("Total Gold: %d\n", args->goldOwed); // total gold owed to dept
 }
 
 

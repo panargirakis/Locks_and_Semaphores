@@ -8,3 +8,9 @@ part_1.o: part_1.c
 
 clean:
 	rm -f *.o part_1
+
+test: all
+	./part_1 2 10 10 11 9 11 10
+	echo test arguement rejection
+	./part_1 4 5 10 11 9 11 10
+	./part_1 4 30 10 11 7 11 6
