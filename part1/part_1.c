@@ -33,8 +33,8 @@ void *individual (void *arguments) {
 		    team = rwlock_acquire_pirLock(&sem);
         else
             team = rwlock_acquire_ninLock(&sem);
-//        printf("%s id:%d success enter cost dept. Using team %d\n",
-//        		args->isPirate ? "Pirate" : "Ninja", args->threadNum, team);
+        printf("%s id:%d success enter cost dept. Using team %d\n",
+        		args->isPirate ? "Pirate" : "Ninja", args->threadNum, team);
 		// enter costume department -- attempt to access lock for costume shop
 
 		time(&end_t); // measure waiting time
@@ -49,6 +49,9 @@ void *individual (void *arguments) {
             rwlock_release_pirLock(&sem);
         else
             rwlock_release_ninLock(&sem);
+
+		printf("%s id:%d left cost dept. Used team %d\n",
+			   args->isPirate ? "Pirate" : "Ninja", args->threadNum, team);
 
         if (wait_t > 30.0) { // if wait time more than 30 min
 //			printf("Waited for more than 30 min [%.0fmin]\n", wait_t);
