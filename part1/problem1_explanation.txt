@@ -1,264 +1,140 @@
-In order to synchronize the pirates and ninjas entering and exiting the dressing room, we used semaphores. Using a semaphore allowed us to have multiple pirates or multiple ninjas enter the dressing room by having multiple locks. Our solution maximizes profits while not depriving one side or the other of the costume department by
+In order to synchronize the pirates and ninjas entering and exiting the dressing room, we used semaphores. Using a semaphore allowed us to have multiple pirates or multiple ninjas enter the dressing room by having multiple locks. Our solution maximizes profits while not depriving one side or the other of the costume department by having a semaphore that acts as a FIFO queue. In this way, requests get serviced in the order they come. However, there is one exception. To maximize the utilization of the teams (and the profit), instead of setting the initial value of the queue semaphore to 1, it is set to half the number of teams. In this way, every time a thread requests priority, it may be competing against another thread that does not have priority but may be a member of the same team (and thus can enter immediately). This means that a thread has a better chance of getting in if it belongs to the same team that currently occupies the store, thus increasing parallelism. However, fairness will still exist because eventually the queue will be serviced.
 
 
 Output of Example Run: (Analysis Below)
-cshue@cs3013:~/project_3/CS3013_P3/part1$ ./part_1 2 10 10 1 1 1 1
-Thread 0 will be isPirate1
-Thread 1 will be isPirate1
-Thread 2 will be isPirate1
-Thread 3 will be isPirate1
-Thread 4 will be isPirate1
-Thread 5 will be isPirate1
-Thread 6 will be isPirate1
-Thread 7 will be isPirate1
-Thread 8 will be isPirate1
-Thread 9 will be isPirate1
-Thread 10 will be isPirate0
-Thread 11 will be isPirate0
-Thread 12 will be isPirate0
-Thread 13 will be isPirate0
-Thread 14 will be isPirate0
-Thread 15 will be isPirate0
-Thread 16 will be isPirate0
-Thread 17 will be isPirate0
-Thread 18 will be isPirate0
-Thread 19 will be isPirate0
-Thread 6 isPir? 1 try enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 6 isPir? 1 success enter cost dept
-Thread 7 isPir? 1 try enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 7 isPir? 1 success enter cost dept
-Thread 8 isPir? 1 try enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 5 isPir? 1 try enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 9 isPir? 1 try enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 10 isPir? 0 try enter cost dept
-acq. ninlock: trying to get ninlock
-Thread 11 isPir? 0 try enter cost dept
-Thread 12 isPir? 0 try enter cost dept
-Thread 13 isPir? 0 try enter cost dept
-Thread 4 isPir? 1 try enter cost dept
-Thread 14 isPir? 0 try enter cost dept
-Thread 15 isPir? 0 try enter cost dept
-Thread 16 isPir? 0 try enter cost dept
-Thread 17 isPir? 0 try enter cost dept
-Thread 18 isPir? 0 try enter cost dept
-Thread 19 isPir? 0 try enter cost dept
-Thread 3 isPir? 1 try enter cost dept
-Thread 2 isPir? 1 try enter cost dept
-Thread 1 isPir? 1 try enter cost dept
-Thread 0 isPir? 1 try enter cost dept
-Thread 7 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 7 isPir? 1 success leave cost dept
-Thread 8 isPir? 1 success enter cost dept
-Thread 6 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 6 isPir? 1 success leave cost dept
-Thread 5 isPir? 1 success enter cost dept
-Thread 8 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 8 isPir? 1 success leave cost dept
-Thread 9 isPir? 1 success enter cost dept
-Thread 5 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 5 isPir? 1 success leave cost dept
-Thread 7 isPir? 1 try enter cost dept
-Thread 9 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 9 isPir? 1 success leave cost dept
-acq. ninlock: success get ninlock
-Thread 10 isPir? 0 success enter cost dept
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-Thread 11 isPir? 0 success enter cost dept
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-acq. pirlock: trying to get pirlock
-Thread 8 isPir? 1 try enter cost dept
-Thread 10 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 10 isPir? 0 success leave cost dept
-Thread 11 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 11 isPir? 0 success leave cost dept
-Thread 12 isPir? 0 success enter cost dept
-Thread 13 isPir? 0 success enter cost dept
-Thread 9 isPir? 1 try enter cost dept
-Thread 12 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 12 isPir? 0 success leave cost dept
-Thread 13 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 13 isPir? 0 success leave cost dept
-acq. pirlock: success get pirlock
-Thread 4 isPir? 1 success enter cost dept
-acq. ninlock: trying to get ninlock
-Thread 4 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 4 isPir? 1 success leave cost dept
-acq. ninlock: success get ninlock
-Thread 14 isPir? 0 success enter cost dept
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-Thread 15 isPir? 0 success enter cost dept
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-Thread 13 isPir? 0 try enter cost dept
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-acq. ninlock: trying to get ninlock
-acq. ninlock: success get ninlock
-acq. pirlock: trying to get pirlock
-Thread 15 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 15 isPir? 0 success leave cost dept
-Thread 14 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 14 isPir? 0 success leave cost dept
-Thread 16 isPir? 0 success enter cost dept
-Thread 17 isPir? 0 success enter cost dept
-Thread 16 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 16 isPir? 0 success leave cost dept
-Thread 13 isPir? 0 success enter cost dept
-Thread 17 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 17 isPir? 0 success leave cost dept
-Thread 18 isPir? 0 success enter cost dept
-Thread 13 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 13 isPir? 0 success leave cost dept
-Thread 18 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 18 isPir? 0 success leave cost dept
-Thread 19 isPir? 0 success enter cost dept
-Thread 19 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 19 isPir? 0 success leave cost dept
-acq. pirlock: success get pirlock
-Thread 3 isPir? 1 success enter cost dept
-Thread 18 isPir? 0 try enter cost dept
-acq. ninlock: trying to get ninlock
-Thread 13 isPir? 0 try enter cost dept
-Thread 3 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 3 isPir? 1 success leave cost dept
-acq. ninlock: success get ninlock
-Thread 18 isPir? 0 success enter cost dept
-acq. pirlock: trying to get pirlock
-Thread 18 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 18 isPir? 0 success leave cost dept
-Thread 3 isPir? 1 try enter cost dept
-acq. pirlock: success get pirlock
-Thread 0 isPir? 1 success enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 7 isPir? 1 success enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-acq. ninlock: trying to get ninlock
-Thread 7 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 7 isPir? 1 success leave cost dept
-Thread 8 isPir? 1 success enter cost dept
-Thread 0 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 0 isPir? 1 success leave cost dept
-Called join for thread 1
-Thread 9 isPir? 1 success enter cost dept
-Thread 8 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 8 isPir? 1 success leave cost dept
-Thread 9 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 9 isPir? 1 success leave cost dept
-Thread 2 isPir? 1 success enter cost dept
-Thread 2 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 2 isPir? 1 success leave cost dept
-acq. ninlock: success get ninlock
-Thread 13 isPir? 0 success enter cost dept
-acq. pirlock: trying to get pirlock
-Thread 13 isPir? 0 try leave cost dept
-rel. ninlock: trying to get ninlock
-rel. ninlock: success get ninlock
-Thread 13 isPir? 0 success leave cost dept
-acq. pirlock: success get pirlock
-Thread 1 isPir? 1 success enter cost dept
-acq. pirlock: trying to get pirlock
-acq. pirlock: success get pirlock
-Thread 3 isPir? 1 success enter cost dept
-Thread 3 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 3 isPir? 1 success leave cost dept
-Thread 1 isPir? 1 try leave cost dept
-rel. pirlock: trying to get pirlock
-rel. pirlock: success get pirlock
-Thread 1 isPir? 1 success leave cost dept
-Called join for thread 2
-Called join for thread 3
-Called join for thread 4
-Called join for thread 5
-Called join for thread 6
-Called join for thread 7
-Called join for thread 8
-Called join for thread 9
-Called join for thread 10
-Called join for thread 11
-Called join for thread 12
-Called join for thread 13
-Called join for thread 14
-Called join for thread 15
-Called join for thread 16
-Called join for thread 17
-Called join for thread 18
-Called join for thread 19
-Called join for thread 20
+/home/panos/CS3013/Project_3/part1/cmake-build-debug/Project3 4 10 10 11 9 11 10
+
+~~~~~ Welcome to Pirates vs Ninjas - Peace Edit ~~~~~~
+
+Pirate with ID: 0
+Number of Visits: 3
+Costuming Time of Each Visit:  Visit 0: 11 min    Visit 1: 12 min    Visit 2: 12 min
+Wait Times of Each Visit:  Visit 0: 47 min    Visit 1: 0 min    Visit 2: 2 min
+Total Gold: 24
+
+Pirate with ID: 1
+Number of Visits: 5
+Costuming Time of Each Visit:  Visit 0: 10 min    Visit 1: 12 min    Visit 2: 11 min    Visit 3: 11 min    Visit 4: 11 min
+Wait Times of Each Visit:  Visit 0: 46 min    Visit 1: 1 min    Visit 2: 1 min    Visit 3: 0 min    Visit 4: 0 min
+Total Gold: 45
+
+Pirate with ID: 2
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 12 min
+Wait Times of Each Visit:  Visit 0: 66 min
+Total Gold: 0
+
+Pirate with ID: 3
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 15 min
+Wait Times of Each Visit:  Visit 0: 12 min
+Total Gold: 15
+
+Pirate with ID: 4
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 11 min
+Wait Times of Each Visit:  Visit 0: 37 min
+Total Gold: 0
+
+Pirate with ID: 5
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 10 min
+Wait Times of Each Visit:  Visit 0: 47 min
+Total Gold: 0
+
+Pirate with ID: 6
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 12 min
+Wait Times of Each Visit:  Visit 0: 36 min
+Total Gold: 0
+
+Pirate with ID: 7
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 10 min    Visit 1: 7 min
+Wait Times of Each Visit:  Visit 0: 36 min    Visit 1: 11 min
+Total Gold: 7
+
+Pirate with ID: 8
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 13 min
+Wait Times of Each Visit:  Visit 0: 36 min
+Total Gold: 0
+
+Pirate with ID: 9
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 10 min
+Wait Times of Each Visit:  Visit 0: 13 min
+Total Gold: 10
+
+Ninja with ID: 10
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 12 min
+Wait Times of Each Visit:  Visit 0: 0 min
+Total Gold: 12
+
+Ninja with ID: 11
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 10 min
+Wait Times of Each Visit:  Visit 0: 0 min
+Total Gold: 10
+
+Ninja with ID: 12
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 11 min
+Wait Times of Each Visit:  Visit 0: 26 min
+Total Gold: 11
+
+Ninja with ID: 13
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 7 min    Visit 1: 8 min
+Wait Times of Each Visit:  Visit 0: 26 min    Visit 1: 17 min
+Total Gold: 15
+
+Ninja with ID: 14
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 11 min
+Wait Times of Each Visit:  Visit 0: 0 min
+Total Gold: 11
+
+Ninja with ID: 15
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 9 min
+Wait Times of Each Visit:  Visit 0: 26 min
+Total Gold: 9
+
+Ninja with ID: 16
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 9 min
+Wait Times of Each Visit:  Visit 0: 58 min
+Total Gold: 0
+
+Ninja with ID: 17
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 8 min
+Wait Times of Each Visit:  Visit 0: 0 min
+Total Gold: 8
+
+Ninja with ID: 18
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 9 min
+Wait Times of Each Visit:  Visit 0: 56 min
+Total Gold: 0
+
+Ninja with ID: 19
+Number of Visits: 3
+Costuming Time of Each Visit:  Visit 0: 9 min    Visit 1: 10 min    Visit 2: 10 min
+Wait Times of Each Visit:  Visit 0: 26 min    Visit 1: 13 min    Visit 2: 6 min
+Total Gold: 29
+
+Total time in day: 157 minutes
+Team 1 was busy 69% of the day with 108 min of work
+Team 2 was busy 47% of the day with 74 min of work
+Team 3 was busy 28% of the day with 44 min of work
+Team 4 was busy 55% of the day with 87 min of work
+
+Gross profit: 206 gold
+Gold-Per-Visit: 6 gold
+Net profit: 186 gold
 
 ***
 Analysis of synchronization scheme in this specific run:
