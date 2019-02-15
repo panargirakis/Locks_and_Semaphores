@@ -159,7 +159,7 @@ int main (int argc, char* argv[]) {
 	printf("Net profit: %d gold\n", grossGold - expenses);
 
 	int avgQLen = 0;
-//	printf("Average Queque Length: %d individuals\n", avgQLen);
+//	printf("Average Queue Length: %d individuals\n", avgQLen);
 
 
 	// print final stats

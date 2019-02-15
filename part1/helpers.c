@@ -104,28 +104,21 @@ void billingStats (argstruct *args) {
 
 
 /**
-* Prints expense profits 
-* @param numCTeams The number of costuming teams
+* Prints the average length of the queue 
+* @param qLenth The number of individuals in the queue at the given time
 * @param totalTime The total amount of time inside costuming department
 */
-//void profitStats (int numCTeams, int totalTime) {
-//	int teamCost = 5 * numCTeams;
-//	printf("Costuming teams cost per day: %d\n", teamCost);
-//
-//	// amount of time that each team was busy
-//	// amount of time each team was free
-//
-//	int avgQLen = (pirates + ninjas) / totalTime;  // average queue length
-//	printf("Average Queue Length: %d\n", avgQLen);
-//
-//	int goldAmt; // gross revenue (amount of gold)
-//	printf("Gross Revenue: %d\n", goldAmt);
-//	int goldPerVis = goldAmt/numVisits;
-//	printf("Gold-Per-Visit: %d\n", goldPerVis);
-//
-//	int totalProfit = goldAmt - teamCost;
-//	printf("Total Profit: %d\n", totalProfit);
-//}
+void avgQLength (int qLength) {
+	int totalLength = 0;
+	int counter = 0;		
+	for (int i = 0; i < 10, i++) {
+		totalLength = totalLength + qLength;
+		counter++;
+	}
+	printf("Total Length: %d\n", totalLength);
+	printf("Average Queue Length: %d\n", totalLength/counter);
+
+}
 
 
 

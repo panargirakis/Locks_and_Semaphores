@@ -2,145 +2,203 @@ In order to synchronize the pirates and ninjas entering and exiting the dressing
 
 
 Output of Example Run: (Analysis Below)
-/home/panos/CS3013/Project_3/part1/cmake-build-debug/Project3 4 10 10 11 9 11 10
-
+cshue@cs3013:~/project_3/CS3013_P3/part1$ ./part_1 4 10 10 11 9 11 10
 ~~~~~ Welcome to Pirates vs Ninjas - Peace Edit ~~~~~~
+Ninja id:15 success enter cost dept. Using team 1
+Ninja id:10 success enter cost dept. Using team 2
+Ninja id:10 left cost dept. Used team 2
+Ninja id:15 left cost dept. Used team 1
+Pirate id:5 success enter cost dept. Using team 1
+Pirate id:4 success enter cost dept. Using team 2
+Pirate id:9 success enter cost dept. Using team 3
+Pirate id:4 left cost dept. Used team 2
+Pirate id:9 left cost dept. Used team 3
+Pirate id:5 left cost dept. Used team 1
+Ninja id:11 success enter cost dept. Using team 1
+Ninja id:12 success enter cost dept. Using team 2
+Ninja id:13 success enter cost dept. Using team 3
+Ninja id:17 success enter cost dept. Using team 4
+Ninja id:12 left cost dept. Used team 2
+Ninja id:13 left cost dept. Used team 3
+Ninja id:17 left cost dept. Used team 4
+Ninja id:18 success enter cost dept. Using team 2
+Ninja id:19 success enter cost dept. Using team 3
+Ninja id:11 left cost dept. Used team 1
+Ninja id:19 left cost dept. Used team 3
+Ninja id:18 left cost dept. Used team 2
+Pirate id:6 success enter cost dept. Using team 1
+Pirate id:7 success enter cost dept. Using team 2
+Pirate id:8 success enter cost dept. Using team 3
+Pirate id:1 success enter cost dept. Using team 4
+Pirate id:8 left cost dept. Used team 3
+Pirate id:6 left cost dept. Used team 1
+Pirate id:3 success enter cost dept. Using team 3
+Pirate id:1 left cost dept. Used team 4
+Pirate id:0 success enter cost dept. Using team 3
+Pirate id:7 left cost dept. Used team 2
+Pirate id:3 left cost dept. Used team 3
+Pirate id:0 left cost dept. Used team 3
+Ninja id:14 success enter cost dept. Using team 1
+Ninja id:16 success enter cost dept. Using team 2
+Ninja id:15 success enter cost dept. Using team 3
+Ninja id:15 left cost dept. Used team 3
+Ninja id:14 left cost dept. Used team 1
+Ninja id:16 left cost dept. Used team 2
+Pirate id:2 success enter cost dept. Using team 1
+Pirate id:9 success enter cost dept. Using team 2
+Pirate id:5 success enter cost dept. Using team 3
+Pirate id:5 left cost dept. Used team 3
+Pirate id:9 left cost dept. Used team 2
+Pirate id:2 left cost dept. Used team 1
+Ninja id:13 success enter cost dept. Using team 1
+Ninja id:18 success enter cost dept. Using team 2
+Ninja id:11 success enter cost dept. Using team 3
+Ninja id:14 success enter cost dept. Using team 4
+Ninja id:11 left cost dept. Used team 3
+Ninja id:18 left cost dept. Used team 2
+Ninja id:13 left cost dept. Used team 1
+Ninja id:14 left cost dept. Used team 4
+Pirate id:6 success enter cost dept. Using team 1
+Pirate id:6 left cost dept. Used team 1
 
 Pirate with ID: 0
-Number of Visits: 3
-Costuming Time of Each Visit:  Visit 0: 11 min    Visit 1: 12 min    Visit 2: 12 min
-Wait Times of Each Visit:  Visit 0: 47 min    Visit 1: 0 min    Visit 2: 2 min
-Total Gold: 24
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 12 min    
+Wait Times of Each Visit:  Visit 0: 47 min    
+Total Gold: 0
 
 Pirate with ID: 1
-Number of Visits: 5
-Costuming Time of Each Visit:  Visit 0: 10 min    Visit 1: 12 min    Visit 2: 11 min    Visit 3: 11 min    Visit 4: 11 min
-Wait Times of Each Visit:  Visit 0: 46 min    Visit 1: 1 min    Visit 2: 1 min    Visit 3: 0 min    Visit 4: 0 min
-Total Gold: 45
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 10 min    
+Wait Times of Each Visit:  Visit 0: 37 min    
+Total Gold: 0
 
 Pirate with ID: 2
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 12 min
-Wait Times of Each Visit:  Visit 0: 66 min
+Costuming Time of Each Visit:  Visit 0: 14 min    
+Wait Times of Each Visit:  Visit 0: 67 min    
 Total Gold: 0
 
 Pirate with ID: 3
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 15 min
-Wait Times of Each Visit:  Visit 0: 12 min
-Total Gold: 15
+Costuming Time of Each Visit:  Visit 0: 10 min    
+Wait Times of Each Visit:  Visit 0: 46 min    
+Total Gold: 0
 
 Pirate with ID: 4
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 11 min
-Wait Times of Each Visit:  Visit 0: 37 min
-Total Gold: 0
+Costuming Time of Each Visit:  Visit 0: 9 min    
+Wait Times of Each Visit:  Visit 0: 10 min    
+Total Gold: 9
 
 Pirate with ID: 5
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 10 min
-Wait Times of Each Visit:  Visit 0: 47 min
-Total Gold: 0
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 13 min    Visit 1: 11 min    
+Wait Times of Each Visit:  Visit 0: 10 min    Visit 1: 38 min    
+Total Gold: 13
 
 Pirate with ID: 6
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 12 min
-Wait Times of Each Visit:  Visit 0: 36 min
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 10 min    Visit 1: 12 min    
+Wait Times of Each Visit:  Visit 0: 37 min    Visit 1: 35 min    
 Total Gold: 0
 
 Pirate with ID: 7
-Number of Visits: 2
-Costuming Time of Each Visit:  Visit 0: 10 min    Visit 1: 7 min
-Wait Times of Each Visit:  Visit 0: 36 min    Visit 1: 11 min
-Total Gold: 7
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 13 min    
+Wait Times of Each Visit:  Visit 0: 37 min    
+Total Gold: 0
 
 Pirate with ID: 8
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 13 min
-Wait Times of Each Visit:  Visit 0: 36 min
+Costuming Time of Each Visit:  Visit 0: 10 min    
+Wait Times of Each Visit:  Visit 0: 37 min    
 Total Gold: 0
 
 Pirate with ID: 9
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 10 min
-Wait Times of Each Visit:  Visit 0: 13 min
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 10 min    Visit 1: 14 min    
+Wait Times of Each Visit:  Visit 0: 9 min    Visit 1: 39 min    
 Total Gold: 10
 
 Ninja with ID: 10
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 12 min
-Wait Times of Each Visit:  Visit 0: 0 min
-Total Gold: 12
+Costuming Time of Each Visit:  Visit 0: 8 min    
+Wait Times of Each Visit:  Visit 0: 0 min    
+Total Gold: 8
 
 Ninja with ID: 11
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 10 min
-Wait Times of Each Visit:  Visit 0: 0 min
-Total Gold: 10
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 9 min    Visit 1: 7 min    
+Wait Times of Each Visit:  Visit 0: 21 min    Visit 1: 47 min    
+Total Gold: 9
 
 Ninja with ID: 12
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 11 min
-Wait Times of Each Visit:  Visit 0: 26 min
-Total Gold: 11
+Costuming Time of Each Visit:  Visit 0: 8 min    
+Wait Times of Each Visit:  Visit 0: 21 min    
+Total Gold: 8
 
 Ninja with ID: 13
 Number of Visits: 2
-Costuming Time of Each Visit:  Visit 0: 7 min    Visit 1: 8 min
-Wait Times of Each Visit:  Visit 0: 26 min    Visit 1: 17 min
-Total Gold: 15
+Costuming Time of Each Visit:  Visit 0: 8 min    Visit 1: 9 min    
+Wait Times of Each Visit:  Visit 0: 21 min    Visit 1: 44 min    
+Total Gold: 8
 
 Ninja with ID: 14
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 11 min
-Wait Times of Each Visit:  Visit 0: 0 min
-Total Gold: 11
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 8 min    Visit 1: 10 min    
+Wait Times of Each Visit:  Visit 0: 59 min    Visit 1: 9 min    
+Total Gold: 10
 
 Ninja with ID: 15
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 9 min
-Wait Times of Each Visit:  Visit 0: 26 min
-Total Gold: 9
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 11 min    Visit 1: 7 min    
+Wait Times of Each Visit:  Visit 0: 0 min    Visit 1: 38 min    
+Total Gold: 11
 
 Ninja with ID: 16
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 9 min
-Wait Times of Each Visit:  Visit 0: 58 min
+Costuming Time of Each Visit:  Visit 0: 10 min    
+Wait Times of Each Visit:  Visit 0: 57 min    
 Total Gold: 0
 
 Ninja with ID: 17
 Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 8 min
-Wait Times of Each Visit:  Visit 0: 0 min
+Costuming Time of Each Visit:  Visit 0: 8 min    
+Wait Times of Each Visit:  Visit 0: 21 min    
 Total Gold: 8
 
 Ninja with ID: 18
-Number of Visits: 1
-Costuming Time of Each Visit:  Visit 0: 9 min
-Wait Times of Each Visit:  Visit 0: 56 min
-Total Gold: 0
+Number of Visits: 2
+Costuming Time of Each Visit:  Visit 0: 9 min    Visit 1: 8 min    
+Wait Times of Each Visit:  Visit 0: 29 min    Visit 1: 36 min    
+Total Gold: 9
 
 Ninja with ID: 19
-Number of Visits: 3
-Costuming Time of Each Visit:  Visit 0: 9 min    Visit 1: 10 min    Visit 2: 10 min
-Wait Times of Each Visit:  Visit 0: 26 min    Visit 1: 13 min    Visit 2: 6 min
-Total Gold: 29
+Number of Visits: 1
+Costuming Time of Each Visit:  Visit 0: 8 min    
+Wait Times of Each Visit:  Visit 0: 31 min    
+Total Gold: 0
 
-Total time in day: 157 minutes
-Team 1 was busy 69% of the day with 108 min of work
-Team 2 was busy 47% of the day with 74 min of work
-Team 3 was busy 28% of the day with 44 min of work
-Team 4 was busy 55% of the day with 87 min of work
+Total time in day: 116 minutes
+Team 1 was busy 74% of the day with 86 min of work
+Team 2 was busy 68% of the day with 79 min of work
+Team 3 was busy 72% of the day with 83 min of work
+Team 4 was busy 24% of the day with 28 min of work
 
-Gross profit: 206 gold
-Gold-Per-Visit: 6 gold
-Net profit: 186 gold
+Gross profit: 103 gold
+Gold-Per-Visit: 3 gold
+Net profit: 83 gold
+
+
 
 ***
 Analysis of synchronization scheme in this specific run:
 1. 20 total threads are created, 10 are pirates and the other 10 are ninjas.
-2. Thread 6 (a pirate), attempts to acquire the pirate lock and succeeds as no other thread has acquired it. Thus, it is able to enter the dressing room.
-3. Next, Thread 7 also tries to enter the dressing room and succeeds because it is also a pirate and the pirate lock has already been acquired.
-4.
+2. Thread 15 (a ninja), requests the priority lock and succeeds. Because it has possesion of the priority lock, it is able to acquire the ninja lock, pirate lock, and team lock. Having these three locks bars the other team (the pirates) from entering the costuming department and only allows members of their team to enter. Once the ninjas acquire these three locks, they let go of the priority lock.
+3. Next, Thread 10 also tries to enter the dressing room and succeeds because it is also a ninja and the ninja lock, pirate lock, and team lock has already been acquired by the ninja team.
+4. Thread 10 leaves the department and Thread 15 follows out, letting go of all three locks.
+5. Once the priority lock was let go by the ninjas, the pirates immediately requested the priority lock. While the ninjas were in the costuming department, the pirates were just waiting for their turn. Requesting the priority lock means that whenever the team that you are waiting for has released it (the ninjas), you (the pirates) automatically get possesion of the ninja lock, pirate lock, and team lock. The priority lock maintains fairness, as one team will not be starved of the costuming department. The cycle continues from here.
 
 
