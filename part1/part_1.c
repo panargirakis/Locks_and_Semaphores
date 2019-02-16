@@ -72,7 +72,7 @@ void *individual (void *arguments) {
 }
 
 int main (int argc, char* argv[]) {
-	// srand(time(NULL)); // get different random number each time
+	srand(time(NULL)); // get different random number each time
 	printf("\n~~~~~ Welcome to Pirates vs Ninjas - Peace Edit ~~~~~~\n");
 	if (argc != 8) { 
 		printf("ERROR: Please enter 7 arguments\n");
