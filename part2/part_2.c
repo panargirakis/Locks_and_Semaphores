@@ -41,7 +41,7 @@ void *cars (void *arguments) {
         double time_d = difftime(end_t, start_t);
 //		printf("Car %d success enter queue at time %.4f\n", args->threadNum, time_d);
 
-		pthread_mutex_lock(&lockQ[dir]);
+		pthread_mutex_lock(&lockQ[dir]); // get cue lock
 		push(args, dir);  // push in queue
         while (!checkIfFirst(args)) { // exit loop if you are the first in the list
 			pthread_cond_wait(&condQ[dir], &lockQ[dir]);  // wait until you are serviced

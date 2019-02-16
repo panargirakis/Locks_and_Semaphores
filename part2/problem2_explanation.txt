@@ -16,3 +16,42 @@ A deadlock can be prevented if by removing at least one of the conditions for de
 4. circular wait: meaning that Thread A is waiting for Thread B which is waiting for Thread C which is waiting for Thread A (having all four cars wait for each other to go in the intersection)
 
 Therefore, if any one of these conditions are removed, then deadlock will be able to be avoided.
+
+OUTPUT OF EXAMPLE RUN (Analysis Below)
+
+/home/panos/CS3013/Project_3/part2/cmake-build-debug/Project3_2
+Car 0 entered the intersection at time 0.0000 from dir 3 and turn 1
+Car 1 entered the intersection at time 0.0000 from dir 1 and turn 1
+Car 0 exited the intersection at time 1.0000
+Car 1 exited the intersection at time 1.0000
+Car 8 entered the intersection at time 1.0000 from dir 0 and turn 0
+Car 8 exited the intersection at time 2.0000
+Car 9 entered the intersection at time 2.0000 from dir 0 and turn 1
+Car 3 entered the intersection at time 2.0000 from dir 2 and turn 0
+Car 9 exited the intersection at time 3.0000
+Car 8 entered the intersection at time 3.0000 from dir 0 and turn 1
+Car 3 exited the intersection at time 3.0000
+Car 5 entered the intersection at time 3.0000 from dir 2 and turn 1
+Car 7 entered the intersection at time 3.0000 from dir 3 and turn 1
+Car 2 entered the intersection at time 3.0000 from dir 1 and turn 1
+Car 8 exited the intersection at time 4.0000
+Car 5 exited the intersection at time 4.0000
+Car 6 entered the intersection at time 4.0000 from dir 2 and turn 1
+Car 2 exited the intersection at time 4.0000
+Car 4 entered the intersection at time 4.0000 from dir 1 and turn 1
+Car 7 exited the intersection at time 4.0000
+Car 4 exited the intersection at time 5.0000
+Car 6 exited the intersection at time 5.0000
+Car 12 entered the intersection at time 5.0000 from dir 2 and turn 2
+Car 12 exited the intersection at time 6.0000
+Car 2 entered the intersection at time 6.0000 from dir 0 and turn 0
+Car 2 exited the intersection at time 7.0000
+Car 10 entered the intersection at time 7.0000 from dir 3 and turn 2
+Car 13 entered the intersection at time 7.0000 from dir 2 and turn 1
+Car 10 exited the intersection at time 8.0000
+Car 13 exited the intersection at time 8.0000
+Car 15 entered the intersection at time 8.0000 from dir 1 and turn 0
+Car 15 exited the intersection at time 9.0000
+Car 16 entered the intersection at time 9.0000 from dir 2 and turn 0
+Car 16 exited the intersection at time 10.0000
+Car 17 entered the intersection at time 10.0000 from dir 1 and turn 0
