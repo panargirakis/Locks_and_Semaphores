@@ -114,9 +114,11 @@ Turn Directions: 0 = left, 1 = right, 2 = straight
 
 
 Analysis for Specific Run:
-1. Car 0 enters the intersection from the East side and takes a right turn. At the same time, Car 1 enters the intersection from the South side and takes a right turn.
-2. Once both Cars 0 and 1 exit the intersection, Car 8 enters from the North side and takes a left. It makes sense that Car 8 does this after Cars 0 and 1 leave the intersection, otherwise there would be a car crash.
-3. This cycle of synchronization continues with the remaining cars in the queue.
+1. Car 5 approaches the intersection from the East side and wishes to take a right turn at time 0. It is able to enter the intersection as no cars are currently in it and take a right turn from the East side. At the same time, Car 6 approaches the intersection from the South side and wishes to take a right turn. Because Car 5's right turn does not interfere with the right turn that Car 6 wants to take, Car 6 is able to enter the intersection from the South side and take a right turn.
+2. While Cars 5 and 6 are in the intersection, a multitude of other cars approach the intersection from their respective directions with a random turn direction that they would like to take. 
+3. Once both Cars 5 and 6 exit the intersection, they get sent back into the queue and approach the intersection with a new approach and turn direction. Car 13 then enters the intersection from the North side and takes a left. It makes sense that Car 13 does this after Cars 5 and 6 leave the intersection, otherwise there would be a car crash.
+4. Car 13 leaves the intersection and it placed back in the queue with new a new approach and turn direction.
+3. This cycle of synchronization continues with the remaining cars in the queue (and technically never ends since we have our code running in an infinite loop).
 
 
 How It Meets Requirements:
