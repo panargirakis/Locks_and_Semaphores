@@ -23,41 +23,88 @@ Therefore, if any one of these conditions are removed, then deadlock will be abl
 
 OUTPUT OF EXAMPLE RUN (Analysis Below)
 /home/panos/CS3013/Project_3/part2/cmake-build-debug/Project3_2
-Car 0 entered the intersection at time 0.0000 from dir 3 and turn 1
-Car 1 entered the intersection at time 0.0000 from dir 1 and turn 1
-Car 0 exited the intersection at time 1.0000
-Car 1 exited the intersection at time 1.0000
-Car 8 entered the intersection at time 1.0000 from dir 0 and turn 0
-Car 8 exited the intersection at time 2.0000
-Car 9 entered the intersection at time 2.0000 from dir 0 and turn 1
-Car 3 entered the intersection at time 2.0000 from dir 2 and turn 0
-Car 9 exited the intersection at time 3.0000
-Car 8 entered the intersection at time 3.0000 from dir 0 and turn 1
-Car 3 exited the intersection at time 3.0000
-Car 5 entered the intersection at time 3.0000 from dir 2 and turn 1
-Car 7 entered the intersection at time 3.0000 from dir 3 and turn 1
-Car 2 entered the intersection at time 3.0000 from dir 1 and turn 1
-Car 8 exited the intersection at time 4.0000
-Car 5 exited the intersection at time 4.0000
-Car 6 entered the intersection at time 4.0000 from dir 2 and turn 1
-Car 2 exited the intersection at time 4.0000
-Car 4 entered the intersection at time 4.0000 from dir 1 and turn 1
+Car 5 approaching intersection from dir 3 and turn 1 at time 0.0000
+Car 5 entered the intersection at time 0.0000 from dir 3 and turn 1
+Car 6 approaching intersection from dir 1 and turn 1 at time 0.0000
+Car 6 entered the intersection at time 0.0000 from dir 1 and turn 1
+Car 7 approaching intersection from dir 1 and turn 1 at time 0.0000
+Car 8 approaching intersection from dir 2 and turn 0 at time 0.0000
+Car 9 approaching intersection from dir 1 and turn 1 at time 0.0000
+Car 10 approaching intersection from dir 2 and turn 1 at time 0.0000
+Car 11 approaching intersection from dir 2 and turn 1 at time 0.0000
+Car 12 approaching intersection from dir 3 and turn 1 at time 0.0000
+Car 13 approaching intersection from dir 0 and turn 0 at time 0.0000
+Car 14 approaching intersection from dir 0 and turn 1 at time 0.0000
+Car 15 approaching intersection from dir 3 and turn 2 at time 0.0000
+Car 16 approaching intersection from dir 3 and turn 0 at time 0.0000
+Car 17 approaching intersection from dir 2 and turn 2 at time 0.0000
+Car 18 approaching intersection from dir 2 and turn 1 at time 0.0000
+Car 4 approaching intersection from dir 3 and turn 1 at time 0.0000
+Car 19 approaching intersection from dir 1 and turn 0 at time 0.0000
+Car 3 approaching intersection from dir 2 and turn 0 at time 0.0000
+Car 2 approaching intersection from dir 1 and turn 0 at time 0.0000
+Car 1 approaching intersection from dir 1 and turn 1 at time 0.0000
+Car 0 approaching intersection from dir 3 and turn 1 at time 0.0000
+Car 5 exited the intersection at time 1.0000
+Car 5 approaching intersection from dir 1 and turn 0 at time 1.0000
+Car 13 entered the intersection at time 1.0000 from dir 0 and turn 0
+Car 6 exited the intersection at time 1.0000
+Car 6 approaching intersection from dir 1 and turn 2 at time 1.0000
+Car 13 exited the intersection at time 2.0000
+Car 13 approaching intersection from dir 0 and turn 1 at time 2.0000
+Car 14 entered the intersection at time 2.0000 from dir 0 and turn 1
+Car 8 entered the intersection at time 2.0000 from dir 2 and turn 0
+Car 14 exited the intersection at time 3.0000
+Car 14 approaching intersection from dir 2 and turn 2 at time 3.0000
+Car 12 entered the intersection at time 3.0000 from dir 3 and turn 1
+Car 7 entered the intersection at time 3.0000 from dir 1 and turn 1
+Car 13 entered the intersection at time 3.0000 from dir 0 and turn 1
+Car 8 exited the intersection at time 3.0000
+Car 8 approaching intersection from dir 3 and turn 0 at time 3.0000
+Car 10 entered the intersection at time 3.0000 from dir 2 and turn 1
+Car 12 exited the intersection at time 4.0000
+Car 12 approaching intersection from dir 1 and turn 1 at time 4.0000
+Car 13 exited the intersection at time 4.0000
+Car 13 approaching intersection from dir 3 and turn 2 at time 4.0000
+Car 15 entered the intersection at time 4.0000 from dir 3 and turn 2
 Car 7 exited the intersection at time 4.0000
-Car 4 exited the intersection at time 5.0000
-Car 6 exited the intersection at time 5.0000
-Car 12 entered the intersection at time 5.0000 from dir 2 and turn 2
-Car 12 exited the intersection at time 6.0000
-Car 2 entered the intersection at time 6.0000 from dir 0 and turn 0
-Car 2 exited the intersection at time 7.0000
-Car 10 entered the intersection at time 7.0000 from dir 3 and turn 2
-Car 13 entered the intersection at time 7.0000 from dir 2 and turn 1
-Car 10 exited the intersection at time 8.0000
-Car 13 exited the intersection at time 8.0000
-Car 15 entered the intersection at time 8.0000 from dir 1 and turn 0
+Car 7 approaching intersection from dir 0 and turn 0 at time 4.0000
+Car 9 entered the intersection at time 4.0000 from dir 1 and turn 1
+Car 10 exited the intersection at time 4.0000
+Car 10 approaching intersection from dir 2 and turn 2 at time 4.0000
+Car 11 entered the intersection at time 4.0000 from dir 2 and turn 1
+Car 15 exited the intersection at time 5.0000
+Car 15 approaching intersection from dir 0 and turn 1 at time 5.0000
+Car 11 exited the intersection at time 5.0000
+Car 11 approaching intersection from dir 1 and turn 0 at time 5.0000
+Car 9 exited the intersection at time 5.0000
+Car 9 approaching intersection from dir 0 and turn 0 at time 5.0000
+Car 7 entered the intersection at time 5.0000 from dir 0 and turn 0
+Car 7 exited the intersection at time 6.0000
+Car 7 approaching intersection from dir 0 and turn 2 at time 6.0000
+Car 16 entered the intersection at time 6.0000 from dir 3 and turn 0
+Car 16 exited the intersection at time 7.0000
+Car 16 approaching intersection from dir 2 and turn 0 at time 7.0000
+Car 19 entered the intersection at time 7.0000 from dir 1 and turn 0
+Car 19 exited the intersection at time 8.0000
+Car 19 approaching intersection from dir 1 and turn 2 at time 8.0000
+Car 4 entered the intersection at time 8.0000 from dir 3 and turn 1
+Car 17 entered the intersection at time 8.0000 from dir 2 and turn 2
+Car 15 entered the intersection at time 8.0000 from dir 0 and turn 1
+Car 4 exited the intersection at time 9.0000
+Car 4 approaching intersection from dir 0 and turn 0 at time 9.0000
 Car 15 exited the intersection at time 9.0000
-Car 16 entered the intersection at time 9.0000 from dir 2 and turn 0
-Car 16 exited the intersection at time 10.0000
-Car 17 entered the intersection at time 10.0000 from dir 1 and turn 0
+Car 15 approaching intersection from dir 2 and turn 0 at time 9.0000
+Car 17 exited the intersection at time 9.0000
+Car 17 approaching intersection from dir 2 and turn 0 at time 9.0000
+Car 18 entered the intersection at time 9.0000 from dir 2 and turn 1
+Car 2 entered the intersection at time 9.0000 from dir 1 and turn 0
+Car 18 exited the intersection at time 10.0000
+Car 18 approaching intersection from dir 2 and turn 2 at time 10.0000
+Car 9 entered the intersection at time 10.0000 from dir 0 and turn 0
+Car 0 entered the intersection at time 10.0000 from dir 3 and turn 1
+Car 2 exited the intersection at time 10.0000
+Car 2 approaching intersection from dir 3 and turn 2 at time 10.0000
 
 
 *****

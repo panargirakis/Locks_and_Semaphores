@@ -30,14 +30,15 @@ void *cars (void *arguments) {
         args->approachDir = assignApp();
         args->turnDir = assignTurn();
         getCubesNeeded(args);
+        time_t end_t;
+        double time_d;
 
         Dir dir = args->approachDir;
 
-        printf("Car %d approaching intersection from dir %d and turn %d\n",
-        		args->threadNum, args->approachDir, args->turnDir);
-        time_t end_t;
-		time(&end_t);
-        double time_d = difftime(end_t, start_t);
+        time(&end_t);
+        time_d = difftime(end_t, start_t);
+        printf("Car %d approaching intersection from dir %d and turn %d at time %.4f\n",
+        		args->threadNum, args->approachDir, args->turnDir, time_d);
 //		printf("Car %d success enter queue at time %.4f\n", args->threadNum, time_d);
 
 		pthread_mutex_lock(&lockQ[dir]); // get cue lock
