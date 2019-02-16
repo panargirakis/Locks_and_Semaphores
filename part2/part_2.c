@@ -40,8 +40,10 @@ void *cars (void *arguments) {
 		time(&end_t);
         double time_d = difftime(end_t, start_t);
 //		printf("Car %d success enter queue at time %.4f\n", args->threadNum, time_d);
-        push(args, dir);  // push in queue
-        while (!checkIfFirst(args)) {
+
+		pthread_mutex_lock(&lockQ[dir]);
+		push(args, dir);  // push in queue
+        while (!checkIfFirst(args)) { // exit loop if you are the first in the list
 			pthread_cond_wait(&condQ[dir], &lockQ[dir]);  // wait until you are serviced
 		}
 		pthread_mutex_unlock(&lockQ[dir]); // unlock queue
@@ -52,7 +54,7 @@ void *cars (void *arguments) {
         time_d = difftime(end_t, start_t);
         printf("Car %d entered the intersection at time %.4f from dir %d and turn %d\n",
         		args->threadNum, time_d, args->approachDir, args->turnDir);
-        sleep((unsigned int) 1);
+        sleep((unsigned int) 1); // drive in the intersection
 
 		for (int i = 0; i < args->numCNeeded; i++) { // unlock all cube locks
 			pthread_mutex_unlock(&lockCube[args->cubesNeeded[i]]);
