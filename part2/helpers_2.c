@@ -1,7 +1,7 @@
 
-typedef enum _Dir {L = 0, R, S, DIRMAX} Dir;
+typedef enum _Dir {L = 0, R, STR, DIRMAX} Dir;
 typedef enum _Cubes {NW = 0, NE, SW, SE, CUBEMAX} Cubes;
-typedef enum _Appr {N = 0, S, W, E, APPRMAX} Appr;
+typedef enum _Appr {N = 0, SOUTH, W, E, APPRMAX} Appr;
 
 typedef struct argstruct {
 	Appr approachDir; // NW, NE, SW, or SE
@@ -9,7 +9,6 @@ typedef struct argstruct {
 	int threadNum;
 	Cubes cubesNeeded[4];
 	int numCNeeded;
-	pthread_cond_t amDone = PTHREAD_COND_INITIALIZER;
 } argstruct;
 
 
@@ -33,44 +32,53 @@ Dir assignTurn() {
 }
 
 void getCubesNeeded(argstruct *args) {
-	int *numCNeeded = &args->numCNeeded;
-	Cubes *cubesNeeded = &args->cubesNeeded;
-	numCNeeded = 0;
 	if (args->approachDir == N && args->turnDir == L) {
-		numCNeeded = 3;
-		cubesNeeded = {NW, SW, SE, 0};
+		args->numCNeeded = 3;
+		args->cubesNeeded[0] = NW;
+		args->cubesNeeded[1] = SW;
+		args->cubesNeeded[2] = SE;
 	} else if (args->approachDir == N && args->turnDir == R) {
-		numCNeeded = 1;
-		cubesNeeded[0] = NW;
-	} else if (args->approachDir == N && args->turnDir == S) {
-		numCNeeded = 2;
-		cubesNeeded = {NW, SW, 0, 0};
+		args->numCNeeded = 1;
+		args->cubesNeeded[0] = NW;
+	} else if (args->approachDir == N && args->turnDir == STR) {
+		args->numCNeeded = 2;
+		args->cubesNeeded[0] = NW;
+		args->cubesNeeded[1] = SW;
 	} else if (args->approachDir == W && args->turnDir == L) { // W
-		numCNeeded = 3;
-		cubesNeeded = {NE, SW, SE, 0};
+		args->numCNeeded = 3;
+        args->cubesNeeded[0] = NE;
+        args->cubesNeeded[1] = SW;
+        args->cubesNeeded[2] = SE;
 	} else if (args->approachDir == W && args->turnDir == R) {
-		numCNeeded = 1;
-		cubesNeeded[0] = SW;
-	} else if (args->approachDir == W && args->turnDir == S) {
-		numCNeeded = 2;
-		cubesNeeded = {SW, SE, 0, 0};
-	} else if (args->approachDir == S && args->turnDir == L) { // S
-		numCNeeded = 3;
-		cubesNeeded = {NW, NE, SE, 0};
-	} else if (args->approachDir == S && args->turnDir == R) {
-		numCNeeded = 1;
-		cubesNeeded[0] = SE;
-	} else if (args->approachDir == S && args->turnDir == S) {
-		numCNeeded = 2;
-		cubesNeeded = {NE, SE, 0, 0};
+		args->numCNeeded = 1;
+		args->cubesNeeded[0] = SW;
+	} else if (args->approachDir == W && args->turnDir == STR) {
+		args->numCNeeded = 2;
+        args->cubesNeeded[0] = SW;
+        args->cubesNeeded[1] = SE;
+	} else if (args->approachDir == SOUTH && args->turnDir == L) { // S
+		args->numCNeeded = 3;
+        args->cubesNeeded[0] = NW;
+        args->cubesNeeded[1] = NE;
+        args->cubesNeeded[2] = SE;
+	} else if (args->approachDir == SOUTH && args->turnDir == R) {
+		args->numCNeeded = 1;
+		args->cubesNeeded[0] = SE;
+	} else if (args->approachDir == SOUTH && args->turnDir == STR) {
+		args->numCNeeded = 2;
+        args->cubesNeeded[0] = NE;
+        args->cubesNeeded[1] = SE;
 	} else if (args->approachDir == E && args->turnDir == L) { // E
-		numCNeeded = 3;
-		cubesNeeded = {NW, NE, SW, 0};
+		args->numCNeeded = 3;
+        args->cubesNeeded[0] = NW;
+        args->cubesNeeded[1] = NE;
+        args->cubesNeeded[2] = SW;
 	} else if (args->approachDir == E && args->turnDir == R) {
-		numCNeeded = 1;
-		cubesNeeded[0] = NE;
-	} else if (args->approachDir == E && args->turnDir == S) {
-		numCNeeded = 2;
-		cubesNeeded = {NW, NE, 0, 0};
+		args->numCNeeded = 1;
+		args->cubesNeeded[0] = NE;
+	} else if (args->approachDir == E && args->turnDir == STR) {
+		args->numCNeeded = 2;
+        args->cubesNeeded[0] = NW;
+        args->cubesNeeded[1] = NE;
 	}
 }

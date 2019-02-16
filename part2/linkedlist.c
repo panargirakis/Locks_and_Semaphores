@@ -14,8 +14,9 @@ typedef struct Node
 int numOfQ[APPRMAX];
 Node *q[APPRMAX] = {NULL};
 
-Node *getLast(Node *head) {
-    Node *n = head;
+Node *getLast(Node *n) {
+    if (n == NULL)
+        return n;
     while (n->next != NULL)
         n = n->next;
     return n;
@@ -28,11 +29,18 @@ Node *newNode() {
     return n;
 }
 
+int checkIfFirst(argstruct *args) {
+    return q[args->approachDir]->args == args;
+}
+
 void addLast(argstruct *args, Node *queue) {
     Node *last = getLast(queue); // get last node
     Node *new = newNode(); // allocate new node
     new->args = args; // populate new node
-    last->next = new; // link last to new
+    if (last == NULL)
+        q[args->approachDir] = new;
+    else
+        last->next = new; // link last to new
 }
 
 void push(argstruct *args, Appr dir) {
@@ -40,9 +48,13 @@ void push(argstruct *args, Appr dir) {
     numOfQ[dir]++;
 }
 
-void pop(Appr dir) {
-    Node *deleted = q[dir];
-    q[dir] = q[dir]->next;
-    free(deleted);
-    numOfQ[dir]--;
+void pop(argstruct *args, Appr dir) {
+    if (args == q[dir]->args) {
+        Node *deleted = q[dir];
+        q[dir] = q[dir]->next;
+        free(deleted);
+        numOfQ[dir]--;
+    } else {
+        printf("Error. Thread %d invalid pop\n", args->threadNum);
+    }
 }
