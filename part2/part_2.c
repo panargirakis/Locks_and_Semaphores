@@ -17,6 +17,8 @@
 
 #define NUMCARS 20
 
+time_t start_t;
+
 /**
 * Manages flow of cars
 */
@@ -25,22 +27,46 @@
 void *cars (void *arguments) {
     argstruct *args = (argstruct *) arguments;
 	while (1) {
+//		sleep((unsigned int) rand() % 4);
         args->approachDir = assignApp();
         args->turnDir = assignTurn();
-        printf("Car %d will have approach direction: %d\n", args->threadNum, args->approachDir);
-        printf("Car %d will have turn direction: %d\n", args->threadNum, args->turnDir);
         getCubesNeeded(args);
 
         Dir dir = args->approachDir;
 
-		pthread_mutex_lock(&lockQ[dir]);  // get queue lock
+//        printf("Car %d req to enter queue from dir %d and turn %d\n",
+//        		args->threadNum, args->approachDir, args->turnDir);
+        time_t end_t;
+		time(&end_t);
+        double time_d = difftime(end_t, start_t);
+//		printf("Car %d success enter queue at time %.4f\n", args->threadNum, time_d);
         push(args, dir);  // push in queue
-		pthread_cond_wait(&condQ[dir], &lockQ[dir]);  // wait until you are serviced
-        pthread_mutex_unlock(&lockQ[dir]); // unlock queue
+        while (!checkIfFirst(args)) {
+			pthread_cond_wait(&condQ[dir], &lockQ[dir]);  // wait until you are serviced
+		}
+		pthread_mutex_unlock(&lockQ[dir]); // unlock queue
+        for (int i = 0; i < args->numCNeeded; i++) { // get all cube locks
+        	pthread_mutex_lock(&lockCube[args->cubesNeeded[i]]);
+        }
+		time(&end_t);
+        time_d = difftime(end_t, start_t);
+        printf("Car %d entered the intersection at time %.4f from dir %d and turn %d\n",
+        		args->threadNum, time_d, args->approachDir, args->turnDir);
+        sleep((unsigned int) 1);
+
+		for (int i = 0; i < args->numCNeeded; i++) { // unlock all cube locks
+			pthread_mutex_unlock(&lockCube[args->cubesNeeded[i]]);
+		}
+		time(&end_t);
+		time_d = difftime(end_t, start_t);
+		printf("Car %d exited the intersection at time %.4f\n", args->threadNum, time_d);
+
+		pthread_mutex_lock(&lockQ[dir]);  // get queue lock
+		pop(args, dir);
+		pthread_cond_signal(&condQ[dir]);
+		pthread_mutex_unlock(&lockQ[dir]); // unlock queue
 
 
-		// try to go through
-		// trylock loop
 	};
 }
 #pragma clang diagnostic pop
@@ -52,14 +78,16 @@ int main() {
 	// struct for args
 	argstruct *args = (argstruct *) malloc(NUMCARS*sizeof(argstruct));
 
+	time(&start_t);
+
 	// assign car directions
 	for (int i = 0; i < NUMCARS; i++) {
+		args[i].threadNum = i;
 		pthread_create(&threads[i], NULL, &cars, (void *) &args[i]);
 	}
 
 	// join threads	
 	for (int i = 0; i < NUMCARS; i++) {
-	    args[i].threadNum = i;
 		pthread_join(threads[i], NULL);
 		printf("Called join for thread %d\n", i+1);
 	}
