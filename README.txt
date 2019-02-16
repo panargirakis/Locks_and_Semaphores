@@ -9,6 +9,8 @@ How to Test:
 1. make
 2. ./part_1 [numCTeams] [numPirates] [numNinjas] [avgCTimeP] [avgCTimeN] [avgATimeP] [avgATimeN]
 
+Note: We have created a special makefile that has test cases we have written for this solution. The first test has all of the correct arguments. The second test should not work because it has incorrect arguments. The third test should work and has different arguments than the first one.
+
 
 *****
 
