@@ -17,8 +17,11 @@ A deadlock can be prevented if by removing at least one of the conditions for de
 
 Therefore, if any one of these conditions are removed, then deadlock will be able to be avoided.
 
-OUTPUT OF EXAMPLE RUN (Analysis Below)
 
+*****
+
+
+OUTPUT OF EXAMPLE RUN (Analysis Below)
 /home/panos/CS3013/Project_3/part2/cmake-build-debug/Project3_2
 Car 0 entered the intersection at time 0.0000 from dir 3 and turn 1
 Car 1 entered the intersection at time 0.0000 from dir 1 and turn 1
@@ -55,3 +58,21 @@ Car 15 exited the intersection at time 9.0000
 Car 16 entered the intersection at time 9.0000 from dir 2 and turn 0
 Car 16 exited the intersection at time 10.0000
 Car 17 entered the intersection at time 10.0000 from dir 1 and turn 0
+
+
+*****
+Key:
+Approach Directions: 0 = North, 1 = South, 2 = West, 3 = East
+Turn Directions: 0 = left, 1 = right, 2 = straight
+
+
+Analysis for Specific Run:
+1. Car 0 enters the intersection from the East side and takes a right turn. At the same time, Car 1 enters the intersection from the South side and takes a right turn.
+2. Once both Cars 0 and 1 exit the intersection, Car 8 enters from the North side and takes a left. It makes sense that Car 8 does this after Cars 0 and 1 leave the intersection, otherwise there would be a car crash.
+3. This cycle of synchronization continues with the remaining cars in the queue.
+
+
+How It Meets Requirements:
+1. To enter the intersection, each car must have all of the locks that it required for the turn it wants to make. Since the lock can only be held by one car at a time, no two cars can occupy the same block at the same time.
+2. The car will keep waiting if it is not the first one in the linked list and thus, the first one in the intersection.
+3. This solution maintains fairness
