@@ -2,6 +2,9 @@
 // Created by panos and amanda on 2/15/19.
 //
 
+pthread_mutex_t lockCube[CUBEMAX] = {PTHREAD_MUTEX_INITIALIZER}; // initializes lock
+pthread_cond_t cubeCond[CUBEMAX] = PTHREAD_COND_INITIALIZER; // initilize condition
+
 pthread_mutex_t lockQ[4] = {PTHREAD_MUTEX_INITIALIZER}; // initializes lock
 pthread_cond_t condQ[4] = PTHREAD_COND_INITIALIZER; // initilize condition
 

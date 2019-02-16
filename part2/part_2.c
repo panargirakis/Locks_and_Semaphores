@@ -13,7 +13,6 @@
 #include <time.h>
 #include "helpers_2.c"
 #include "linkedlist.c"
-#include "locks_2.c"
 
 #define NUMCARS 20
 
