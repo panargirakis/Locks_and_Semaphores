@@ -27,3 +27,7 @@ No two cars be in the same portion of the intersection at the same time. Each di
 How to Test:
 1. make
 2. ./part_2
+
+Note: To interpret the print statements, use this key:
+Approach Directions: 0 = North, 1 = South, 2 = West, 3 = East
+Turn Directions = 0 = left, 1 = right, 2 = straight
