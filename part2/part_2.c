@@ -33,8 +33,8 @@ void *cars (void *arguments) {
 
         Dir dir = args->approachDir;
 
-//        printf("Car %d req to enter queue from dir %d and turn %d\n",
-//        		args->threadNum, args->approachDir, args->turnDir);
+        printf("Car %d approaching intersection from dir %d and turn %d\n",
+        		args->threadNum, args->approachDir, args->turnDir);
         time_t end_t;
 		time(&end_t);
         double time_d = difftime(end_t, start_t);
