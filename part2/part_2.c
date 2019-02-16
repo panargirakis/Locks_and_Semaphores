@@ -76,6 +76,7 @@ void *cars (void *arguments) {
 
 int main() {
 	pthread_t threads[NUMCARS]; // queue for all cars
+	srand(time(NULL));
 
 	// struct for args
 	argstruct *args = (argstruct *) malloc(NUMCARS*sizeof(argstruct));
